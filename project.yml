@@ -1,0 +1,31 @@
+name: swiftui-practice
+options:
+  bundleIdPrefix: com.robert.gravina  
+targets:
+  SwiftUIPractice:
+    type: application
+    platform: iOS
+    deploymentTarget: "17.4"
+    sources:
+      - swiftui-practice
+    info:
+      path: swiftui-practice/Info.plist
+      properties:
+        UISupportedInterfaceOrientations: [UIInterfaceOrientationPortrait]
+        UILaunchStoryboardName: LaunchScreen
+    scheme:
+      testTargets:
+      - SwiftUIPracticeTests
+  SwiftUIPracticeTests:
+    type: bundle.unit-test
+    platform: iOS
+    dependencies:
+      - target: SwiftUIPractice
+    module: SwiftUIPractice
+    sources:
+      - swiftui-practiceTests
+    info:
+      path: swiftui-practiceTests/Info.plist
+      properties:
+        UISupportedInterfaceOrientations: [UIInterfaceOrientationPortrait]
+        UILaunchStoryboardName: LaunchScreen
