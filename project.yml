@@ -1,6 +1,13 @@
 name: SwiftUIPractice
 options:
   bundleIdPrefix: com.robert.gravina  
+packages:
+  ViewInspector:
+    url: https://github.com/nalexn/ViewInspector
+    from: 0.9.11
+  Nimble:
+    url: https://github.com/Quick/Nimble
+    from: 13.3.0
 targets:
   SwiftUIPractice:
     type: application
@@ -21,6 +28,8 @@ targets:
     platform: iOS
     dependencies:
       - target: SwiftUIPractice
+      - package: ViewInspector
+      - package: Nimble
     module: SwiftUIPractice
     sources:
       - SwiftUIPracticeTests
