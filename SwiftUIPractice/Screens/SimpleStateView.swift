@@ -11,8 +11,8 @@ class RandomPastelColorGenerator: ColorGenerator {
 }
 
 struct SimpleStateView: View {
-    let colorGenerator: ColorGenerator
-    @State var color: Color
+    private let colorGenerator: ColorGenerator
+    @State private var color: Color
     internal let inspection = Inspection<Self>()
 
     init(colorGenerator: ColorGenerator) {

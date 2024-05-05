@@ -2,7 +2,7 @@ import SwiftUI
 
 struct FigureWalkView: View {
     let colorGenerator: ColorGenerator
-    @State var color: Color
+    @State private var color: Color
 
     init(colorGenerator: ColorGenerator) {
         self.colorGenerator = colorGenerator

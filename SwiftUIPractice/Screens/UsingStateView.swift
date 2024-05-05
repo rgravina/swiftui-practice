@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct UsingStateView: View {
-    static let numIcons = 50
+    private static let numIcons = 50
     let colorGenerator: ColorGenerator
 
     var body: some View {
@@ -16,8 +16,8 @@ struct UsingStateView: View {
                     GridItem(.flexible()),
                     GridItem(.flexible())
                 ]) {
-                    ForEach(0..<UsingStateView.numIcons, id: \.self) { _ in
-                        FigureWalkView(colorGenerator: colorGenerator)
+                    ForEach(0..<UsingStateView.numIcons, id: \.self) { index in
+                        FigureWalkView(colorGenerator: colorGenerator).id("figure-walk-\(index)")
                     }
                 }
             }

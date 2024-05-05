@@ -15,7 +15,12 @@ struct SwiftUIPracticeApp: App {
                 UsingStateView(
                     colorGenerator: colorGenerator
                 ).tabItem {
-                    Label("Using @State", systemImage: "figure.run")
+                    Label("Using @State", systemImage: "figure.walk")
+                }
+                BindingView(
+                    colorGenerator: colorGenerator
+                ).tabItem {
+                    Label("Using @Binding", systemImage: "figure.run")
                 }
             }
         }
