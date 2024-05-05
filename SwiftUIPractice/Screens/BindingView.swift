@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct BindingView: View {
-    private static let numIcons = 20
+    private static let numIcons = 15
     private let colorGenerator: ColorGenerator
     @State private var colors: [Color]
     internal let inspection = Inspection<Self>()
@@ -11,12 +11,19 @@ struct BindingView: View {
         self.colors = (0..<BindingView.numIcons).map { _ in colorGenerator.color()}
     }
 
+    private func regenerateColors() {
+        self.colors = (0..<BindingView.numIcons).map { _ in colorGenerator.color()}
+    }
+
     var body: some View {
         VStack {
             VStack {
-                Text("This view contains a grid of views that have a @Binding to @State on the parent view. This is why we can print the list of colors below. Tap any icon to chose a random pastel color.")
+                Text("This view contains a grid of views that have a @Binding to @State on the parent view. The colors can be changed in the parent via the \"Regenerate Colors\" button or in the subviews via tapping on any runner icon.")
                     .padding()
                 Spacer()
+                Button("Rengenerate Colors") {
+                    regenerateColors()
+                }.padding()
                 LazyVGrid(columns: [
                     GridItem(.flexible()),
                     GridItem(.flexible()),
