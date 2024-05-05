@@ -4,9 +4,13 @@ import SwiftUI
 struct SwiftUIPracticeApp: App {
     var body: some Scene {
         WindowGroup {
-            SwiftUIPracticeView(
-                colorGenerator: RandomPastelColorGenerator()
-            )
+            TabView {
+                SimpleStateView(
+                    colorGenerator: RandomPastelColorGenerator()
+                ).tabItem {
+                    Label("@State", systemImage: "figure.walk")
+                }
+            }
         }
     }
 }

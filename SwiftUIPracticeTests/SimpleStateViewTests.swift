@@ -14,7 +14,7 @@ class AlwaysOrangeAndPurpleColorGenerator: ColorGenerator {
     }
 }
 
-final class SimpleStateViewTest: XCTestCase {
+final class SimpleStateViewTests: XCTestCase {
     var view: SimpleStateView!
 
     override func setUp() {

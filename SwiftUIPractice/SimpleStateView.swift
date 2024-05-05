@@ -10,7 +10,7 @@ class RandomPastelColorGenerator: ColorGenerator {
     }
 }
 
-struct SwiftUIPracticeView: View {
+struct SimpleStateView: View {
     let colorGenerator: ColorGenerator
     @State var color: Color
     internal let inspection = Inspection<Self>()
@@ -37,7 +37,7 @@ struct SwiftUIPracticeView: View {
 }
 
 #Preview {
-    SwiftUIPracticeView(
+    SimpleStateView(
         colorGenerator: RandomPastelColorGenerator()
     ).preferredColorScheme(.dark)
 }
