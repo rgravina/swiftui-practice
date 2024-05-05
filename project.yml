@@ -12,7 +12,7 @@ targets:
   SwiftUIPractice:
     type: application
     platform: iOS
-    deploymentTarget: "17.4"
+    deploymentTarget: "16"
     sources:
       - SwiftUIPractice
     info:
