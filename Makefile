@@ -1,2 +1,5 @@
 open:
-	xcodegen && open swiftui-practice.xcodeproj
+	xcodegen && open SwiftUIPractice.xcodeproj
+
+lint:
+	swiftlint --fix
