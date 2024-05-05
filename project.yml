@@ -1,6 +1,8 @@
 name: SwiftUIPractice
 options:
-  bundleIdPrefix: com.robert.gravina  
+  bundleIdPrefix: com.robert.gravina
+settings:
+  ENABLE_USER_SCRIPT_SANDBOXING: 'YES'
 packages:
   ViewInspector:
     url: https://github.com/nalexn/ViewInspector
