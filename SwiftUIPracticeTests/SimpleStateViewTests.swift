@@ -36,6 +36,6 @@ final class SimpleStateViewTests: XCTestCase {
     }
 
     private func figure(_ view: InspectableView<ViewType.View<SimpleStateView>>) throws -> InspectableView<ViewType.ClassifiedView> {
-        return try view.find(viewWithId: "figure.walk")
+        return try view.find(viewWithAccessibilityIdentifier: "figure.walk")
     }
 }

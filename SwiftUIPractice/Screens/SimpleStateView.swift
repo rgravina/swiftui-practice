@@ -22,17 +22,18 @@ struct SimpleStateView: View {
 
     var body: some View {
         VStack {
+            Text("This view uses @State to store the color of the icon. Tap the icon to chose a random pastel color.")
+                .padding()
             Image(systemName: "figure.walk")
                 .resizable()
                 .scaledToFit()
                 .foregroundStyle(color)
-                .id("figure.walk")
+                .accessibilityIdentifier("figure.walk")
                 .onTapGesture {
                     color = colorGenerator.color()
                 }
                 .onReceive(inspection.notice) { self.inspection.visit(self, $0) }
         }
-        .padding()
     }
 }
 
