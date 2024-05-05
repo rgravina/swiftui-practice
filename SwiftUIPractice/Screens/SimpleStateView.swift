@@ -23,6 +23,7 @@ struct SimpleStateView: View {
                     color = colorGenerator.color()
                 }
                 .onReceive(inspection.notice) { self.inspection.visit(self, $0) }
+                .padding()
         }
     }
 }
