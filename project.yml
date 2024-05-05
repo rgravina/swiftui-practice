@@ -20,6 +20,7 @@ targets:
       properties:
         UISupportedInterfaceOrientations: [UIInterfaceOrientationPortrait]
         UILaunchStoryboardName: LaunchScreen
+        UIRequiresFullScreen: true
     scheme:
       testTargets:
       - SwiftUIPracticeTests
