@@ -20,6 +20,7 @@ struct UsingStateView: View {
                         FigureWalkView(colorGenerator: colorGenerator).id("figure-walk-\(index)")
                     }
                 }
+                .padding()
             }
         }
     }

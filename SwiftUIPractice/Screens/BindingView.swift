@@ -19,11 +19,10 @@ struct BindingView: View {
         VStack {
             VStack {
                 Text("This view contains a grid of views that have a @Binding to @State on the parent view. The colors can be changed in the parent via the \"Regenerate Colors\" button or in the subviews via tapping on any runner icon.")
-                    .padding()
                 Spacer()
                 Button("Rengenerate Colors") {
                     regenerateColors()
-                }.padding()
+                }
                 LazyVGrid(columns: [
                     GridItem(.flexible()),
                     GridItem(.flexible()),
@@ -55,5 +54,6 @@ struct BindingView: View {
                 .accessibilityIdentifier("run-grid")
             }
         }
+        .padding()
     }
 }
