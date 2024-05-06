@@ -22,8 +22,15 @@ struct StateObjectView: View {
     var body: some View {
         VStack {
             VStack {
-                Text("Subviews use @Binding to an @ObservableObject view model, which is a @StateObject on the view. The colors can be changed in the parent via the \"Regenerate Colors\" button or via tapping on any runner icon.")
-                Spacer()
+                ScrollView {
+                    Text("""
+Subviews use @Binding to an @ObservableObject view model, which is a @StateObject on the view.
+
+The button has no @State for color and a random color is chosen each time it is rendered.
+
+The colors can be changed in the parent via the \"Regenerate Colors\" button or via tapping on any runner icon.
+""")
+                }
                 Button("Rengenerate Colors") {
                     viewModel.regenerateColors()
                 }

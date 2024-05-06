@@ -18,8 +18,15 @@ struct BindingView: View {
     var body: some View {
         VStack {
             VStack {
-                Text("Subviews use @Binding to a @State array on the parent view. The colors can be changed in the parent via the \"Regenerate Colors\" button or via tapping on any runner icon.")
-                Spacer()
+                ScrollView {
+                    Text("""
+Subviews use @Binding to a @State array on the parent view.
+
+The button has no @State for color and a random color is chosen each time it is rendered.
+
+The colors can be changed in the parent via the \"Regenerate Colors\" button or via tapping on any runner icon.
+""")
+                }
                 Button("Rengenerate Colors") {
                     regenerateColors()
                 }
