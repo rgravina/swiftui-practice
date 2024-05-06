@@ -15,17 +15,22 @@ struct SwiftUIPracticeApp: App {
                 UsingStateView(
                     colorGenerator: colorGenerator
                 ).tabItem {
-                    Label("Using @State", systemImage: "figure.walk")
+                    Label("@State", systemImage: "figure.walk")
                 }
                 BindingView(
                     colorGenerator: colorGenerator
                 ).tabItem {
-                    Label("Using @Binding", systemImage: "figure.run")
+                    Label("@Binding", systemImage: "figure.run")
                 }
                 StateObjectView(
                     viewModel: .init(colorGenerator: colorGenerator)
                 ).tabItem {
-                    Label("Using @StateObject", systemImage: "figure.run")
+                    Label("@StateObject", systemImage: "figure.run")
+                }
+                ObservedObjectView(
+                    viewModel: .init(colorGenerator: colorGenerator)
+                ).tabItem {
+                    Label("@ObservedObject", systemImage: "figure.run")
                 }
             }
         }
