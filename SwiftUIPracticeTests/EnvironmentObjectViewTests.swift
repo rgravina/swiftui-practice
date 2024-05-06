@@ -5,16 +5,15 @@ import Nimble
 
 @testable import SwiftUIPractice
 
-final class ObservedObjectViewTests: XCTestCase {
-    var view: ObservedObjectView!
-
+final class EnvironmentObjectViewTests: XCTestCase {
+    var view: EnvironmentObjectView!
     override func setUp() {
-        view = ObservedObjectView(
-            viewModel: .init(
+        view = EnvironmentObjectView()
+        ViewHosting.host(view: view.environmentObject(
+            ObservedObjectViewModel(
                 colorGenerator: AlwaysOrangeAndPurpleColorGenerator()
             )
-        )
-        ViewHosting.host(view: view)
+        ))
     }
 
     func testRunIcon_isOrange() throws {
@@ -37,11 +36,11 @@ final class ObservedObjectViewTests: XCTestCase {
         }])
     }
 
-    private func text(_ view: InspectableView<ViewType.View<ObservedObjectView>>, _ text: String) throws -> InspectableView<ViewType.Text> {
+    private func text(_ view: InspectableView<ViewType.View<EnvironmentObjectView>>, _ text: String) throws -> InspectableView<ViewType.Text> {
         return try view.find(text: text)
     }
 
-    private func figure(_ view: InspectableView<ViewType.View<ObservedObjectView>>) throws -> InspectableView<ViewType.ClassifiedView> {
+    private func figure(_ view: InspectableView<ViewType.View<EnvironmentObjectView>>) throws -> InspectableView<ViewType.ClassifiedView> {
         return try view
             .find(viewWithAccessibilityIdentifier: "figure.run")
     }
