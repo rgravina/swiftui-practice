@@ -12,7 +12,7 @@ struct SimpleStateView: View {
 
     var body: some View {
         VStack {
-            Text("This view uses @State to store the color of the icon. Tap the icon to chose a random pastel color.")
+            Text("This view uses @State to store the color of the icon. Tap the icon to chose a random color.")
             Spacer()
             Image(systemName: "figure.walk")
                 .resizable()

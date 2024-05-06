@@ -6,8 +6,16 @@ struct UsingStateView: View {
 
     var body: some View {
         VStack {
-            Text("This view contains a grid of views with their own @State. Tap any icon to chose a random pastel color.")
+            Text("""
+This view contains a grid of views with their own @State.
+
+The button has no @State for color and a random color is chosen each time it is rendered. But notice how it does not change when icons are tapped.
+
+Tap any icon to chose a random color for that icon.
+""")
                 .padding()
+            Button("Button") {
+            }.buttonStyle(PrimaryButtonStyle())
             ScrollView {
                 LazyVGrid(columns: [
                     GridItem(.flexible()),
