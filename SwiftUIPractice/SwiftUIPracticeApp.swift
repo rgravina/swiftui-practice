@@ -22,6 +22,11 @@ struct SwiftUIPracticeApp: App {
                 ).tabItem {
                     Label("Using @Binding", systemImage: "figure.run")
                 }
+                StateObjectView(
+                    viewModel: .init(colorGenerator: colorGenerator)
+                ).tabItem {
+                    Label("Using @StateObject", systemImage: "figure.run")
+                }
             }
         }
     }

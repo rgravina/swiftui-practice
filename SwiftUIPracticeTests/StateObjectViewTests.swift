@@ -5,11 +5,15 @@ import Nimble
 
 @testable import SwiftUIPractice
 
-final class BindingViewTests: XCTestCase {
-    var view: BindingView!
+final class StateObjectViewTests: XCTestCase {
+    var view: StateObjectView!
 
     override func setUp() {
-        view = BindingView(colorGenerator: AlwaysOrangeAndPurpleColorGenerator())
+        view = StateObjectView(
+            viewModel: .init(
+                colorGenerator: AlwaysOrangeAndPurpleColorGenerator()
+            )
+        )
         ViewHosting.host(view: view)
     }
 
@@ -33,11 +37,11 @@ final class BindingViewTests: XCTestCase {
         }])
     }
 
-    private func text(_ view: InspectableView<ViewType.View<BindingView>>, _ text: String) throws -> InspectableView<ViewType.Text> {
+    private func text(_ view: InspectableView<ViewType.View<StateObjectView>>, _ text: String) throws -> InspectableView<ViewType.Text> {
         return try view.find(text: text)
     }
 
-    private func figure(_ view: InspectableView<ViewType.View<BindingView>>) throws -> InspectableView<ViewType.ClassifiedView> {
+    private func figure(_ view: InspectableView<ViewType.View<StateObjectView>>) throws -> InspectableView<ViewType.ClassifiedView> {
         return try view
             .find(viewWithAccessibilityIdentifier: "figure.run")
     }

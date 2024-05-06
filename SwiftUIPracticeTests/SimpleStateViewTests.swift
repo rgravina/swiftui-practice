@@ -28,12 +28,12 @@ final class SimpleStateViewTests: XCTestCase {
 
     func testWalkingIcon_withoutViewInspectorInspection_whenTapped_isNotOrange() throws {
         try XCTExpectFailure("inspection must be used") {
-            try self.figure1(self.view).callOnTapGesture()
-            expect(try self.figure1(self.view).foregroundStyleShapeStyle(Color.self)).to(equal(.purple))
+            try self.figureFromView(self.view).callOnTapGesture()
+            expect(try self.figureFromView(self.view).foregroundStyleShapeStyle(Color.self)).to(equal(.purple))
         }
     }
 
-    private func figure1(_ view: SimpleStateView) throws -> InspectableView<ViewType.ClassifiedView> {
+    private func figureFromView(_ view: SimpleStateView) throws -> InspectableView<ViewType.ClassifiedView> {
         return try view.inspect().find(viewWithAccessibilityIdentifier: "figure.walk")
     }
 
