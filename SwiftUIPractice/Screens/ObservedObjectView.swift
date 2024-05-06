@@ -56,7 +56,6 @@ The colors can be changed in the parent via the \"Regenerate Colors\" button or 
                             .onReceive(inspection.notice) { self.inspection.visit(self, $0) }
                     }
                 }
-                .accessibilityIdentifier("run-grid")
             }
         }
         .padding()

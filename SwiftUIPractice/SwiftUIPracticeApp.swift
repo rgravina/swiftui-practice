@@ -3,6 +3,7 @@ import SwiftUI
 @main
 struct SwiftUIPracticeApp: App {
     @State var colorGenerator = RandomPastelColorGenerator()
+    @StateObject var viewModel = ObservedObjectViewModel(colorGenerator: RandomPastelColorGenerator())
 
     var body: some Scene {
         WindowGroup {
@@ -32,7 +33,13 @@ struct SwiftUIPracticeApp: App {
                 ).tabItem {
                     Label("@ObservedObject", systemImage: "figure.run")
                 }
-            }
+                EnvironmentObjectView().tabItem {
+                    Label("@EnvironmentObject 1", systemImage: "figure.run")
+                }
+                EnvironmentObjectView().tabItem {
+                    Label("@EnvironmentObject 2", systemImage: "figure.run")
+                }
+            }.environmentObject(viewModel)
         }
     }
 }

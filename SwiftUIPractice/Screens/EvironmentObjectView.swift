@@ -1,22 +1,7 @@
 import SwiftUI
 
-class StateObjectViewModel: ObservableObject {
-    let colorGenerator: ColorGenerator
-    static let numIcons = 15
-    @Published var colors: [Color]
-
-    init(colorGenerator: ColorGenerator) {
-        self.colorGenerator = colorGenerator
-        self.colors = (0..<StateObjectViewModel.numIcons).map { _ in colorGenerator.color()}
-    }
-
-    func regenerateColors() {
-        self.colors = (0..<StateObjectViewModel.numIcons).map { _ in colorGenerator.color()}
-    }
-}
-
-struct StateObjectView: View {
-    @StateObject var viewModel: StateObjectViewModel
+struct EnvironmentObjectView: View {
+    @EnvironmentObject var viewModel: ObservedObjectViewModel
     internal let inspection = Inspection<Self>()
 
     var body: some View {
@@ -24,7 +9,7 @@ struct StateObjectView: View {
             VStack {
                 ScrollView {
                     Text("""
-Subviews use @Binding to an @ObservableObject view model, which is a @StateObject on the view.
+Subviews use @Binding to an @ObservableObject view model, which is a @EnvironmentObject on the view.
 
 The button has no @State for color and a random color is chosen each time it is rendered.
 
