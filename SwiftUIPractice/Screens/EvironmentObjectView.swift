@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct EnvironmentObjectView: View {
-    @EnvironmentObject var viewModel: ObservedObjectViewModel
+    @EnvironmentObject var viewModel: ColorListViewModel
     internal let inspection = Inspection<Self>()
 
     var body: some View {
@@ -36,7 +36,7 @@ The colors can be changed in the parent via the \"Regenerate Colors\" button or 
                 LazyVGrid(columns: [
                     GridItem(.adaptive(minimum: 60))
                 ]) {
-                    ForEach(0..<StateObjectViewModel.numIcons, id: \.self) { index in
+                    ForEach(0..<ColorListViewModel.numIcons, id: \.self) { index in
                         FigureRunView(colorGenerator: viewModel.colorGenerator, color: $viewModel.colors[index])
                             .onReceive(inspection.notice) { self.inspection.visit(self, $0) }
                     }

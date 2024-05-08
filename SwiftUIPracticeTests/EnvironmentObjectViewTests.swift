@@ -10,7 +10,7 @@ final class EnvironmentObjectViewTests: XCTestCase {
     override func setUp() {
         view = EnvironmentObjectView()
         ViewHosting.host(view: view.environmentObject(
-            ObservedObjectViewModel(
+            ColorListViewModel(
                 colorGenerator: AlwaysOrangeAndPurpleColorGenerator()
             )
         ))

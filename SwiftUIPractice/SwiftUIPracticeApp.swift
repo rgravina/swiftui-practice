@@ -3,7 +3,7 @@ import SwiftUI
 @main
 struct SwiftUIPracticeApp: App {
     @State var colorGenerator = RandomPastelColorGenerator()
-    @StateObject var viewModel = ObservedObjectViewModel(colorGenerator: RandomPastelColorGenerator())
+    @StateObject var viewModel = ColorListViewModel(colorGenerator: RandomPastelColorGenerator())
 
     var body: some Scene {
         WindowGroup {

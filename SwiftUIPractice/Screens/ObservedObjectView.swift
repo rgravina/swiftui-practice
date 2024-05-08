@@ -1,22 +1,7 @@
 import SwiftUI
 
-class ObservedObjectViewModel: ObservableObject {
-    let colorGenerator: ColorGenerator
-    static let numIcons = 15
-    @Published var colors: [Color]
-
-    init(colorGenerator: ColorGenerator) {
-        self.colorGenerator = colorGenerator
-        self.colors = (0..<ObservedObjectViewModel.numIcons).map { _ in colorGenerator.color()}
-    }
-
-    func regenerateColors() {
-        self.colors = (0..<ObservedObjectViewModel.numIcons).map { _ in colorGenerator.color()}
-    }
-}
-
 struct ObservedObjectView: View {
-    @ObservedObject var viewModel: ObservedObjectViewModel
+    @ObservedObject var viewModel: ColorListViewModel
     internal let inspection = Inspection<Self>()
 
     var body: some View {
@@ -51,7 +36,7 @@ The colors can be changed in the parent via the \"Regenerate Colors\" button or 
                 LazyVGrid(columns: [
                     GridItem(.adaptive(minimum: 60))
                 ]) {
-                    ForEach(0..<StateObjectViewModel.numIcons, id: \.self) { index in
+                    ForEach(0..<ColorListViewModel.numIcons, id: \.self) { index in
                         FigureRunView(colorGenerator: viewModel.colorGenerator, color: $viewModel.colors[index])
                             .onReceive(inspection.notice) { self.inspection.visit(self, $0) }
                     }
