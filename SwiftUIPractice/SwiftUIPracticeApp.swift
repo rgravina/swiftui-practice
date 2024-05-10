@@ -39,6 +39,11 @@ struct SwiftUIPracticeApp: App {
                 EnvironmentObjectView().tabItem {
                     Label("@EnvironmentObject 2", systemImage: "figure.run")
                 }
+                CombineView(
+                    viewModel: .init(colorGenerator: colorGenerator)
+                ).tabItem {
+                    Label("Combine", systemImage: "figure.run")
+                }
             }.environmentObject(viewModel)
         }
     }
