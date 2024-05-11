@@ -1,18 +1,17 @@
 import SwiftUI
 
-class CombineViewModel: ObservableObject {
+class DIPBeforeViewModel: ObservableObject {
 }
 
-
-struct CombineView: View {
-    @StateObject var viewModel: CombineViewModel = CombineViewModel()
+struct DIPBeforeView: View {
+    @StateObject var viewModel = DIPBeforeViewModel()
 
     var body: some View {
         VStack {
             VStack {
                 ScrollView {
                     Text("""
-TODO: This view uses Combine.
+TODO: This view contains an example not using DIP.
 """)
                 }
             }
