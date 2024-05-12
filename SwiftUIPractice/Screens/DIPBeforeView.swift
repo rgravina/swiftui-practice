@@ -51,7 +51,7 @@ struct CoffeeMakerApp {
 }
 
 class DIPBeforeViewModel: ObservableObject {
-    @Published var coffee = Array<Coffee>()
+    @Published var coffee = [Coffee]()
 
     func brewCoffee() throws {
         let grinder = BrevilleCoffeeBeansGrinder()
@@ -87,7 +87,6 @@ struct DIPBeforeView: View {
         .padding()
     }
 }
-
 
 struct CoffeeView: View {
     let coffeeName: String
