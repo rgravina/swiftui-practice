@@ -117,6 +117,7 @@ class CoffeeMakerApp {
 //    }
 //}
 
+
 class DIPBeforeViewModel: ObservableObject {
     @Published var coffee = [Coffee]()
 
@@ -129,6 +130,9 @@ class DIPBeforeViewModel: ObservableObject {
     func brewCoffeeWithDIP() throws {
 //        let grinder = KMartCoffeeBeansGrinder()
 //        let maker = KMartStoveTopCoffeeMaker()
+//        let app = CoffeeMakerAppWithDIP(grinder: grinder, maker: maker)
+//        let grinder = BrevilleCoffeeBeansGrinder()
+//        let maker = BialettiStoveTopCoffeeMaker()
 //        let app = CoffeeMakerAppWithDIP(grinder: grinder, maker: maker)
         let app = CoffeeMakerApp()
         let cup = try app.brew()
