@@ -72,7 +72,7 @@ final class CombineTests: XCTestCase {
     }
 
     /*
-        Timer.pubish gives you a publisher that regularly sends values.
+     Timer.pubish gives you a publisher that regularly sends values.
      */
     func testTimerPublisher() {
         let expectation = expectation(description: "waiting for timer")
@@ -94,7 +94,7 @@ final class CombineTests: XCTestCase {
     }
 
     /*
-        scan is an operator that can be used to intercept/scan the stream and transform the value
+     scan is an operator that can be used to intercept/scan the stream and transform the value
      */
     func testTimerWithCounterPublisher() {
         let expectation = expectation(description: "waiting for timer")
@@ -111,6 +111,96 @@ final class CombineTests: XCTestCase {
             }
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            cancellable.cancel()
+            expectation.fulfill()
+        }
+
+        wait(for: [expectation])
+    }
+
+    /*
+     A sequence publisher
+
+     1) sequence publishers complete when the sequence is empty
+     */
+    func testSequencePublisher() {
+        let fridge: Publishers.Sequence<[String], Never> = ["chocolate", "ham", "milk", "salami", "mortadella"].publisher
+
+        _ = fridge.sink(receiveCompletion: { completion in
+            print("completion: ", completion) // 1
+        }, receiveValue: { food in
+            print("food: ", food)
+        })
+    }
+
+    /*
+     Subscribers can be limited also.
+
+     1) The two streams are zipped, so the sequence running out prevents the timer from continuously publishing
+     */
+    func testLimitedSubscriber() {
+        let expectation = expectation(description: "waiting for timer")
+        let fridge = ["chocolate", "ham", "milk", "salami", "mortadella"].publisher
+        let timer = Timer.publish(every: 1, on: .main, in: .common)
+            .autoconnect()
+
+        let cancellable = fridge.zip(timer).sink(receiveCompletion: { completion in
+            print("completion: ", completion)
+        }, receiveValue: { (food, timestamp) in
+            print("food: \(food) at: \(timestamp).") // 1
+        })
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+            cancellable.cancel()
+            expectation.fulfill()
+        }
+
+        wait(for: [expectation])
+    }
+
+    /*
+     Subscribers can be limited also.
+
+     1) The two streams are zipped, so the sequence running out prevents the timer from continuously publishing
+     2) This forces an error to occur after a few seconds
+     3) We can see the completion completed with an error
+
+     Error handling is important when dealting with publishers like those returned by URLSession.
+     */
+    func testLimitedSubscriberWithError() {
+        let expectation = expectation(description: "waiting for timer")
+        let fridge = ["chocolate", "ham", "milk", "salami", "mortadella"].publisher
+        let timer = Timer.publish(every: 1, on: .main, in: .common)
+            .autoconnect()
+        let endDate = Calendar.current.date(byAdding: .second, value: 3, to: Date())!
+
+        struct FoodError: Error {}
+
+        func throwAtEndDate(food: String, timestamp: Date) throws -> String {
+            if timestamp < endDate {
+                return  "\(food) at: \(timestamp)"
+            } else {
+                throw FoodError()
+            }
+        }
+
+        let cancellable = fridge.zip(timer)
+            .tryMap({ (food, timestamp) in
+                try throwAtEndDate(food: food, timestamp: timestamp) // 2
+            })
+            .sink(receiveCompletion: { completion in
+            print("completion: ", completion)
+            switch completion {
+            case .finished:
+                print("everything is OK")
+            case .failure(let error):
+                print("something went wrong: \(error.localizedDescription)")
+            }
+        }, receiveValue: { (message) in
+            print("food: \(message).") // 1
+        })
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
             cancellable.cancel()
             expectation.fulfill()
         }
