@@ -155,9 +155,11 @@ struct DIPBeforeView: View {
                     print("other error")
                 }
             }.buttonStyle(PrimaryButtonStyle())
-            LazyVGrid(columns: coffeeGridLayout) {
-                ForEach(viewModel.coffee) { coffee in
-                    CoffeeView(coffeeName: coffee.name)
+            ScrollView {
+                LazyVGrid(columns: coffeeGridLayout) {
+                    ForEach(viewModel.coffee) { coffee in
+                        CoffeeView(coffeeName: coffee.name)
+                    }
                 }
             }
             Spacer()
