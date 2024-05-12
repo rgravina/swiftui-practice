@@ -19,14 +19,14 @@ enum CoffeeError: Error {
     case noCoffee
 }
 
-//protocol CoffeeMaker {
+// protocol CoffeeMaker {
 //    func addGroundCoffee(coffee: GroundCoffee)
 //    func brew() throws -> Coffee
-//}
+// }
 //
-//protocol CoffeeGrinder {
+// protocol CoffeeGrinder {
 //    func grindBeans() -> GroundCoffee
-//}
+// }
 
 // Breville types
 class BrevilleCoffeeBeansGrinder {
@@ -52,13 +52,13 @@ class BialettiStoveTopCoffeeMaker {
 }
 
 // Kmart types
-//class KMartCoffeeBeansGrinder: CoffeeGrinder {
+// class KMartCoffeeBeansGrinder: CoffeeGrinder {
 //    func grindBeans() -> GroundCoffee {
 //        return GroundCoffee(grind: .course, grams: 15)
 //    }
-//}
+// }
 //
-//class KMartStoveTopCoffeeMaker: CoffeeMaker {
+// class KMartStoveTopCoffeeMaker: CoffeeMaker {
 //    var groundCoffee: GroundCoffee!
 //
 //    func addGroundCoffee(coffee: GroundCoffee) {
@@ -71,8 +71,7 @@ class BialettiStoveTopCoffeeMaker {
 //        }
 //        return Coffee(name: "Espresso by KMart")
 //    }
-//}
-
+// }
 
 class CoffeeMakerApp {
     let grinder: BrevilleCoffeeBeansGrinder
@@ -90,7 +89,7 @@ class CoffeeMakerApp {
     }
 }
 
-//class CoffeeMakerAppWithDI {
+// class CoffeeMakerAppWithDI {
 //    let grinder: BrevilleCoffeeBeansGrinder
 //    let maker: BialettiStoveTopCoffeeMaker
 //
@@ -104,9 +103,9 @@ class CoffeeMakerApp {
 //        maker.addGroundCoffee(coffee: groundCoffee)
 //        return try maker.brew()
 //    }
-//}
+// }
 
-//struct CoffeeMakerAppWithDIP {
+// struct CoffeeMakerAppWithDIP {
 //    let grinder: CoffeeGrinder
 //    let maker: CoffeeMaker
 //
@@ -115,8 +114,7 @@ class CoffeeMakerApp {
 //        maker.addGroundCoffee(coffee: groundCoffee)
 //        return try maker.brew()
 //    }
-//}
-
+// }
 
 class DIPBeforeViewModel: ObservableObject {
     @Published var coffee = [Coffee]()
