@@ -141,6 +141,10 @@ class DIPBeforeViewModel: ObservableObject {
         let cup = try app.brew()
         coffee.append(cup)
     }
+
+    func drinkCoffee() {
+        coffee.removeAll()
+    }
 }
 
 struct DIPBeforeView: View {
@@ -149,15 +153,20 @@ struct DIPBeforeView: View {
 
     var body: some View {
         VStack {
-            Button("Brew Coffee") {
-                do {
-                    try viewModel.brewCoffeeWithDIP()
-                } catch CoffeeError.noCoffee {
-                    print("No coffee in machine!")
-                } catch {
-                    print("other error")
-                }
-            }.buttonStyle(PrimaryButtonStyle())
+            HStack {
+                Button("Brew Coffee") {
+                    do {
+                        try viewModel.brewCoffeeWithDIP()
+                    } catch CoffeeError.noCoffee {
+                        print("No coffee in machine!")
+                    } catch {
+                        print("other error")
+                    }
+                }.buttonStyle(PrimaryButtonStyle())
+                Button("Drink Coffee") {
+                    viewModel.drinkCoffee()
+                }.buttonStyle(PrimaryButtonStyle())
+            }
             ScrollView {
                 LazyVGrid(columns: coffeeGridLayout) {
                     ForEach(viewModel.coffee) { coffee in
