@@ -207,4 +207,32 @@ final class CombineTests: XCTestCase {
 
         wait(for: [expectation])
     }
+
+    class IntWrapper {
+        var int = 0 {
+            didSet {
+                print("int was set to \(int)")
+            }
+        }
+    }
+
+    /*
+     Assign can be used to set a property on an object.
+
+     1) Ranges (like arrays) can produce publishers
+     2) As an alternative to sink, you can use assign to set a property.
+     */
+    func testAssign() {
+        let object = IntWrapper()
+        let range = (0...2)
+        _ = range.publisher // 1
+            .map { $0 * 10 }
+            .sink { value in
+                object.int = value
+            }
+
+        _ = range.publisher
+            .map { $0 * 10 }
+            .assign(to: \.int, on: object) // 2
+    }
 }
