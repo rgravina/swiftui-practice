@@ -105,9 +105,14 @@ class CoffeeMakerApp {
 //    }
 // }
 
-// struct CoffeeMakerAppWithDIP {
+// class CoffeeMakerAppWithDIP {
 //    let grinder: CoffeeGrinder
 //    let maker: CoffeeMaker
+//
+//    init(grinder: CoffeeGrinder, maker: CoffeeMaker) {
+//        self.grinder = grinder
+//        self.maker = maker
+//    }
 //
 //    func brew() throws -> Coffee {
 //        let groundCoffee = grinder.grindBeans()
