@@ -1,8 +1,5 @@
-import Foundation
 import XCTest
 import Nimble
-
-@testable import SwiftUIPractice
 
 class S9000 {
     func isOn() -> Bool {
