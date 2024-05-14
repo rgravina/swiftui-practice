@@ -104,14 +104,14 @@ final class DIPTests: XCTestCase {
     }
 
     /*
-     Simple example using concrete classes DI
+     Simple example using concrete classes but DI
      */
     func testWithDI() {
         SmartHomeDI(toggle: S9000(), bulb: B9000()).run()
     }
 
     /*
-     Simple example using concrete classes DI
+     Simple example using interfaces and DIP
      */
     func testWithDIP() {
         SmartHomeDIP(toggle: S10000(), bulb: B10000()).run()
