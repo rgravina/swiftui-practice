@@ -266,7 +266,7 @@ final class CombineTests: XCTestCase {
     func testPassThroughSubject() {
         let currentBalance = PassthroughSubject<Int, Never>()
 
-        let subscription = currentBalance.sink(receiveCompletion: { completion in
+        _ = currentBalance.sink(receiveCompletion: { completion in
             print("completion: \(completion)")
         }, receiveValue: {value in
             print("value: \(value)")
