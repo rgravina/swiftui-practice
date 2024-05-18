@@ -189,16 +189,16 @@ final class CombineTests: XCTestCase {
                 try throwAtEndDate(food: food, timestamp: timestamp) // 2
             })
             .sink(receiveCompletion: { completion in
-            print("completion: ", completion)
-            switch completion {
-            case .finished:
-                print("everything is OK")
-            case .failure(let error):
-                print("something went wrong: \(error.localizedDescription)")
-            }
-        }, receiveValue: { (message) in
-            print("food: \(message).") // 1
-        })
+                print("completion: ", completion)
+                switch completion {
+                case .finished:
+                    print("everything is OK")
+                case .failure(let error):
+                    print("something went wrong: \(error.localizedDescription)")
+                }
+            }, receiveValue: { (message) in
+                print("food: \(message).") // 1
+            })
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
             cancellable.cancel()
@@ -234,5 +234,45 @@ final class CombineTests: XCTestCase {
         _ = range.publisher
             .map { $0 * 10 }
             .assign(to: \.int, on: object) // 2
+    }
+
+    /*
+     Now it's time to talk more about Publishers. The CurrentValueSubject you can think of as a `var` with a publisher stream attached.
+
+     1) You can get the value of a subject immediately
+     2) You can send values and complete the stream at any time
+     3) Values are ignored if the stream is completed.
+     */
+    func testCurrentValueSubject() {
+        let currentBalance = CurrentValueSubject<Int, Never>(25)
+
+        print("currentBalance: \(currentBalance.value)") // 1
+
+        _ = currentBalance.sink(receiveCompletion: { completion in
+            print("completion: \(completion)")
+        }, receiveValue: {value in
+            print("value: \(value)")
+        })
+
+        currentBalance.send(30) // 2
+        currentBalance.send(35)
+        currentBalance.send(completion: .finished)
+        currentBalance.send(10) // 3
+    }
+
+    /*
+     PassthroughSubject does not hold an initial value. It sends the value down the stream.
+     */
+    func testPassThroughSubject() {
+        let currentBalance = PassthroughSubject<Int, Never>()
+
+        let subscription = currentBalance.sink(receiveCompletion: { completion in
+            print("completion: \(completion)")
+        }, receiveValue: {value in
+            print("value: \(value)")
+        })
+
+        currentBalance.send(10)
+        currentBalance.send(completion: .finished)
     }
 }
