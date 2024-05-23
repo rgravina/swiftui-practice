@@ -47,4 +47,45 @@ final class CombineExampleTests: XCTestCase {
         wait(for: [expectation])
         print("================")
     }
+
+    /*
+     Wrapping an async call with a Future
+     
+     1) Create a Future with return type and error, and pass a closure.
+     2) Call your async API like normal
+     3) In the completion handler, use promise(.failure(<FailureType>)) for errors
+     4) In the completion handler, use promise(.success(<OutputType>)) for success
+     */
+    func testFutures() {
+        print("================")
+        let expectation = expectation(description: "waiting for callback")
+        func callMeBackLater(callback: @escaping (_ message: String, _ error: Error?) -> Void) {
+            Task {
+                sleep(1)
+                callback("Hello from the future!", nil)
+            }
+        }
+
+        let useFutures = Future<String, Error> { promise in // 1
+            callMeBackLater { result, error in // 2
+                if let error = error { // 3
+                    return promise(.failure(error))
+                }
+                return promise(.success(result)) // 4
+            }
+        }.eraseToAnyPublisher()
+
+        var cancellable =  Set<AnyCancellable>()
+
+        useFutures
+            .sink(receiveCompletion: { completion in
+                print(completion)
+                expectation.fulfill()
+            }, receiveValue: { message in
+                print(message)
+            }).store(in: &cancellable)
+
+        wait(for: [expectation])
+        print("================")
+    }
 }
